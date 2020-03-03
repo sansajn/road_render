@@ -38,9 +38,6 @@ constexpr GLfloat vertices[] = {
 	-0.5f, -0.5f, 0.0f,
 };
 
-GLint get_shader_program(char const * vertex_shader_source, char const * fragment_shader_source);
-
-
 int main(int argc, char * argv[]) 
 {
 	glfwInit();

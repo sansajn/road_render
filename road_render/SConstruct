@@ -26,7 +26,7 @@ glt = cpp17.Object([
 	'glt/program.cpp'
 ])
 
-cpp17.Program(['road_render.cpp', glt])
+cpp17.Program(['road_render.cpp', glt, imgui])
 
 # tests
 cpp17.Program(['test_triangle.cpp', glt])

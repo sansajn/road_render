@@ -1,0 +1,4 @@
+*.o
+*.a
+/road_render.*
+/*.kdev4
