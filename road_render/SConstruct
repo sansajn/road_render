@@ -1,0 +1,32 @@
+''' road render project build file
+
+dependencies:
+
+	libglfw3-dev (3.2.1, ubuntu 18.04)
+	libglew-dev (2.0.5, ubuntu 18.04)
+'''
+
+cpp17 = Environment(
+	CCFLAGS=['-std=c++17', '-Wall', '-O0', '-g'],
+	CPPDEFINES=['IMGUI_IMPL_OPENGL_ES3'],
+	CPPPATH=['.', 'imgui/', 'imgui/examples/'])
+
+cpp17.ParseConfig('pkg-config --cflags --libs glfw3 glew gl')
+
+imgui = cpp17.StaticLibrary([
+	Glob('imgui/*.cpp'),
+	'imgui/examples/imgui_impl_glfw.cpp',  # backend for GLFW
+	'imgui/examples/imgui_impl_opengl3.cpp',  # backend for opengl es3
+])
+
+glt = cpp17.Object([
+	'glt/module.cpp',
+	'glt/io.cpp',
+	'glt/gles2.cpp',
+	'glt/program.cpp'
+])
+
+cpp17.Program(['road_render.cpp', glt])
+
+# tests
+cpp17.Program(['test_triangle.cpp', glt])
