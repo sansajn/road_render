@@ -18,7 +18,8 @@ using std::string,
 	std::vector,
 	std::cout,
 	std::endl;
-using glm::vec2;
+using glm::vec2,
+	glm::vec4;
 
 using program = glt::shader::program<
 	glt::shader::module<glt::shader::gles2_shader_type>>;
@@ -36,8 +37,9 @@ void main()	{
 #endif
 #ifdef _FRAGMENT_
 precision mediump float;
+uniform vec4 color;
 void main() {
-	gl_FragColor = vec4(1,0,0,1);
+	gl_FragColor = color;
 }
 #endif
 )";
@@ -52,6 +54,7 @@ constexpr float sample_road[] = {
 
 GLuint push_road(float const * road_nodes, size_t node_count, float road_width);
 void draw_road(GLuint position_vbo, GLint position_loc, size_t node_count);
+void gui_init(GLFWwindow * window);
 
 int main(int argc, char * argv[]) 
 {
@@ -72,15 +75,7 @@ int main(int argc, char * argv[])
 	bool err = glewInit();
 	assert(err == GLEW_OK);
 	
-	// Setup Dear ImGui context
-	IMGUI_CHECKVERSION();
-	ImGui::CreateContext();
-	ImGuiIO & io = ImGui::GetIO(); (void)io;
-	ImGui::StyleColorsDark();
-
-	// Setup Platform/Renderer bindings
-	ImGui_ImplGlfw_InitForOpenGL(window, true);
-	ImGui_ImplOpenGL3_Init();
+	gui_init(window);
 
 	program flat;
 	flat.from_memory(shader_program_code, 100);
@@ -90,8 +85,11 @@ int main(int argc, char * argv[])
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glViewport(0, 0, WIDTH, HEIGHT);
 
+	vec4 road_color = vec4{64/255.0f, 64/255.0f, 64/255.0f, 1.0f};
 	float road_width = 0.05f;
 	GLuint road_vbo = push_road(sample_road, 4, road_width);
+
+	program::uniform_type color_u = flat.uniform_variable("color");
 
 	while (!glfwWindowShouldClose(window)) 
 	{
@@ -119,6 +117,7 @@ int main(int argc, char * argv[])
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		flat.use();
+		color_u = road_color;
 		draw_road(road_vbo, position_loc, 4);
 
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
@@ -187,4 +186,16 @@ GLuint push_road(float const * road_nodes, size_t node_count, float road_width)
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 	return vbo;
+}
+
+void gui_init(GLFWwindow * window)
+{
+	IMGUI_CHECKVERSION();
+	ImGui::CreateContext();
+	ImGuiIO & io = ImGui::GetIO(); (void)io;
+	ImGui::StyleColorsDark();
+
+	// Setup Platform/Renderer bindings
+	ImGui_ImplGlfw_InitForOpenGL(window, true);
+	ImGui_ImplOpenGL3_Init();
 }
