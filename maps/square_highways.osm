@@ -1,0 +1,201 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version="0.6" generator="Osmosis 0.46">
+  <bounds minlon="14.45364" minlat="50.10477" maxlon="14.45629" maxlat="50.10742" origin="CGImap 0.8.1 (9252 thorn-03.openstreetmap.org)"/>
+  <node id="25664661" version="7" timestamp="2017-02-11T16:53:36Z" uid="1340439" user="xtompok" changeset="46002340" lat="50.1033348" lon="14.4559213">
+    <tag k="highway" v="traffic_signals"/>
+  </node>
+  <node id="25665367" version="2" timestamp="2010-12-02T21:25:43Z" uid="17615" user="Petr Dlouhý" changeset="6519711" lat="50.1047466" lon="14.4558559"/>
+  <node id="25665451" version="6" timestamp="2018-02-16T21:45:35Z" uid="969558" user="Matej Lieskovský" changeset="56426710" lat="50.1055169" lon="14.4558005"/>
+  <node id="25665471" version="5" timestamp="2012-09-26T11:18:44Z" uid="17615" user="Petr Dlouhý" changeset="13258097" lat="50.1055493" lon="14.4555004"/>
+  <node id="25681672" version="1" timestamp="2007-02-06T13:47:59Z" uid="1066" user="pavel" changeset="209453" lat="50.1060796" lon="14.4540639"/>
+  <node id="60712020" version="4" timestamp="2010-12-02T21:25:51Z" uid="17615" user="Petr Dlouhý" changeset="6519711" lat="50.1042406" lon="14.4558708"/>
+  <node id="60712023" version="5" timestamp="2012-09-26T11:18:45Z" uid="17615" user="Petr Dlouhý" changeset="13258097" lat="50.1051296" lon="14.4557598"/>
+  <node id="267622053" version="4" timestamp="2012-09-26T11:18:45Z" uid="17615" user="Petr Dlouhý" changeset="13258097" lat="50.1053666" lon="14.4554295"/>
+  <node id="267622054" version="4" timestamp="2012-09-26T11:18:45Z" uid="17615" user="Petr Dlouhý" changeset="13258097" lat="50.1051538" lon="14.4555489"/>
+  <node id="267622055" version="4" timestamp="2012-09-26T11:18:45Z" uid="17615" user="Petr Dlouhý" changeset="13258097" lat="50.1054413" lon="14.455848"/>
+  <node id="268188068" version="3" timestamp="2012-09-26T11:18:45Z" uid="17615" user="Petr Dlouhý" changeset="13258097" lat="50.105246" lon="14.4554618"/>
+  <node id="268188069" version="2" timestamp="2012-09-26T11:18:45Z" uid="17615" user="Petr Dlouhý" changeset="13258097" lat="50.1051275" lon="14.4556708"/>
+  <node id="268188070" version="4" timestamp="2017-07-25T12:38:33Z" uid="17615" user="Petr Dlouhý" changeset="50557613" lat="50.1051795" lon="14.4558375"/>
+  <node id="320363962" version="2" timestamp="2010-12-02T21:24:38Z" uid="17615" user="Petr Dlouhý" changeset="6519711" lat="50.1056432" lon="14.4552463">
+    <tag k="highway" v="crossing"/>
+    <tag k="source" v="bing:ortofoto"/>
+  </node>
+  <node id="320363963" version="3" timestamp="2018-02-16T21:45:35Z" uid="969558" user="Matej Lieskovský" changeset="56426710" lat="50.1062681" lon="14.4535655"/>
+  <node id="1016463694" version="3" timestamp="2011-12-26T23:31:23Z" uid="527259" user="Vratislav Filler" changeset="10211898" lat="50.1034388" lon="14.4559155">
+    <tag k="highway" v="crossing"/>
+    <tag k="source" v="bing:ortofoto"/>
+  </node>
+  <node id="1016634880" version="2" timestamp="2018-02-16T21:45:36Z" uid="969558" user="Matej Lieskovský" changeset="56426710" lat="50.1061305" lon="14.4538432">
+    <tag k="highway" v="crossing"/>
+    <tag k="source" v="bing:ortofoto"/>
+  </node>
+  <node id="1016635513" version="2" timestamp="2011-02-21T17:32:37Z" uid="3516" user="BiIbo" changeset="7355922" lat="50.1055784" lon="14.4554019"/>
+  <node id="1016636875" version="1" timestamp="2010-12-02T21:23:50Z" uid="17615" user="Petr Dlouhý" changeset="6519711" lat="50.1050117" lon="14.4558271">
+    <tag k="highway" v="crossing"/>
+    <tag k="source" v="bing:ortofoto"/>
+  </node>
+  <node id="1165428663" version="1" timestamp="2011-02-21T17:32:05Z" uid="3516" user="BiIbo" changeset="7355922" lat="50.1054522" lon="14.4554394"/>
+  <node id="1165428716" version="2" timestamp="2012-09-26T11:18:43Z" uid="17615" user="Petr Dlouhý" changeset="13258097" lat="50.1055851" lon="14.4556102"/>
+  <node id="1165483703" version="1" timestamp="2011-02-21T18:15:21Z" uid="3516" user="BiIbo" changeset="7355922" lat="50.1040077" lon="14.4558764"/>
+  <node id="1165483766" version="1" timestamp="2011-02-21T18:15:25Z" uid="3516" user="BiIbo" changeset="7355922" lat="50.1038268" lon="14.4558807"/>
+  <node id="1675029540" version="2" timestamp="2012-09-26T11:18:44Z" uid="17615" user="Petr Dlouhý" changeset="13258097" lat="50.1052367" lon="14.455861"/>
+  <node id="1933564594" version="1" timestamp="2012-09-26T11:17:50Z" uid="17615" user="Petr Dlouhý" changeset="13258097" lat="50.1053027" lon="14.4558689"/>
+  <node id="5417381400" version="1" timestamp="2018-02-16T21:45:29Z" uid="969558" user="Matej Lieskovský" changeset="56426710" lat="50.1055732" lon="14.4557113"/>
+  <node id="5417381402" version="1" timestamp="2018-02-16T21:45:29Z" uid="969558" user="Matej Lieskovský" changeset="56426710" lat="50.1061889" lon="14.4538903">
+    <tag k="highway" v="crossing"/>
+  </node>
+  <node id="5417381403" version="1" timestamp="2018-02-16T21:45:29Z" uid="969558" user="Matej Lieskovský" changeset="56426710" lat="50.1062374" lon="14.4536512"/>
+  <node id="5417381405" version="1" timestamp="2018-02-16T21:45:29Z" uid="969558" user="Matej Lieskovský" changeset="56426710" lat="50.1060045" lon="14.4542673"/>
+  <node id="5980844814" version="1" timestamp="2018-10-13T08:21:55Z" uid="527259" user="Vratislav Filler" changeset="63479655" lat="50.1061776" lon="14.4537438"/>
+  <node id="5980844815" version="1" timestamp="2018-10-13T08:21:55Z" uid="527259" user="Vratislav Filler" changeset="63479655" lat="50.1062204" lon="14.453774"/>
+  <node id="5980844816" version="1" timestamp="2018-10-13T08:21:55Z" uid="527259" user="Vratislav Filler" changeset="63479655" lat="50.1060968" lon="14.453951"/>
+  <node id="5980844817" version="1" timestamp="2018-10-13T08:21:55Z" uid="527259" user="Vratislav Filler" changeset="63479655" lat="50.106138" lon="14.4539903"/>
+  <node id="6375935264" version="1" timestamp="2019-04-01T13:29:56Z" uid="96130" user="batat" changeset="68754655" lat="50.1033438" lon="14.4559208"/>
+  <way id="8103142" version="16" timestamp="2019-04-12T11:54:58Z" uid="100163" user="Hlav" changeset="69146594">
+    <nd ref="25665471"/>
+    <nd ref="1165428663"/>
+    <nd ref="267622053"/>
+    <nd ref="268188068"/>
+    <nd ref="267622054"/>
+    <nd ref="268188069"/>
+    <nd ref="60712023"/>
+    <tag k="highway" v="secondary"/>
+    <tag k="junction" v="roundabout"/>
+    <tag k="lit" v="yes"/>
+    <tag k="maxspeed" v="50"/>
+    <tag k="ref" v="6"/>
+    <tag k="sidewalk" v="right"/>
+    <tag k="surface" v="asphalt"/>
+  </way>
+  <way id="13124429" version="14" timestamp="2019-04-01T13:29:59Z" uid="96130" user="batat" changeset="68754655">
+    <nd ref="25664661"/>
+    <nd ref="6375935264"/>
+    <nd ref="1016463694"/>
+    <nd ref="1165483766"/>
+    <nd ref="1165483703"/>
+    <nd ref="60712020"/>
+    <nd ref="25665367"/>
+    <nd ref="1016636875"/>
+    <nd ref="60712023"/>
+    <tag k="cycleway:right" v="lane"/>
+    <tag k="foot" v="yes"/>
+    <tag k="highway" v="secondary"/>
+    <tag k="lit" v="yes"/>
+    <tag k="name" v="Jankovcova"/>
+    <tag k="sidewalk" v="both"/>
+    <tag k="surface" v="asphalt"/>
+  </way>
+  <way id="264659153" version="6" timestamp="2018-04-27T14:23:06Z" uid="255936" user="StenSoft" changeset="58477494">
+    <nd ref="25681672"/>
+    <nd ref="5417381405"/>
+    <tag k="cycleway" v="lane"/>
+    <tag k="highway" v="secondary"/>
+    <tag k="name" v="U Uranie"/>
+    <tag k="name:de" v="Bei der Urania"/>
+    <tag k="surface" v="asphalt"/>
+  </way>
+  <way id="440154123" version="5" timestamp="2019-04-12T11:54:58Z" uid="100163" user="Hlav" changeset="69146594">
+    <nd ref="1675029540"/>
+    <nd ref="1933564594"/>
+    <nd ref="267622055"/>
+    <nd ref="25665451"/>
+    <tag k="highway" v="secondary"/>
+    <tag k="junction" v="roundabout"/>
+    <tag k="lit" v="yes"/>
+    <tag k="maxspeed" v="50"/>
+    <tag k="ref" v="6"/>
+    <tag k="sidewalk" v="right"/>
+    <tag k="surface" v="asphalt"/>
+  </way>
+  <way id="510203936" version="4" timestamp="2019-04-12T11:54:58Z" uid="100163" user="Hlav" changeset="69146594">
+    <nd ref="5417381400"/>
+    <nd ref="1165428716"/>
+    <tag k="highway" v="secondary"/>
+    <tag k="junction" v="roundabout"/>
+    <tag k="lit" v="yes"/>
+    <tag k="maxspeed" v="50"/>
+    <tag k="ref" v="6"/>
+    <tag k="sidewalk" v="right"/>
+    <tag k="surface" v="asphalt"/>
+  </way>
+  <way id="510203937" version="2" timestamp="2019-04-12T11:54:58Z" uid="100163" user="Hlav" changeset="69146594">
+    <nd ref="60712023"/>
+    <nd ref="268188070"/>
+    <nd ref="1675029540"/>
+    <tag k="highway" v="secondary"/>
+    <tag k="junction" v="roundabout"/>
+    <tag k="lit" v="yes"/>
+    <tag k="maxspeed" v="50"/>
+    <tag k="ref" v="6"/>
+    <tag k="sidewalk" v="right"/>
+    <tag k="surface" v="asphalt"/>
+  </way>
+  <way id="561887310" version="2" timestamp="2018-10-13T08:21:55Z" uid="527259" user="Vratislav Filler" changeset="63479655">
+    <nd ref="25681672"/>
+    <nd ref="5980844817"/>
+    <nd ref="5417381402"/>
+    <nd ref="5980844815"/>
+    <nd ref="5417381403"/>
+    <tag k="cycleway" v="lane"/>
+    <tag k="highway" v="secondary"/>
+    <tag k="name" v="U Uranie"/>
+    <tag k="name:de" v="Bei der Urania"/>
+    <tag k="oneway" v="yes"/>
+    <tag k="surface" v="asphalt"/>
+  </way>
+  <way id="561887311" version="2" timestamp="2018-10-13T08:21:55Z" uid="527259" user="Vratislav Filler" changeset="63479655">
+    <nd ref="5417381403"/>
+    <nd ref="5980844814"/>
+    <nd ref="1016634880"/>
+    <nd ref="5980844816"/>
+    <nd ref="25681672"/>
+    <tag k="cycleway" v="lane"/>
+    <tag k="highway" v="secondary"/>
+    <tag k="name" v="U Uranie"/>
+    <tag k="name:de" v="Bei der Urania"/>
+    <tag k="oneway" v="yes"/>
+    <tag k="surface" v="asphalt"/>
+  </way>
+  <way id="583962444" version="1" timestamp="2018-04-27T14:23:04Z" uid="255936" user="StenSoft" changeset="58477494">
+    <nd ref="320363963"/>
+    <nd ref="5417381403"/>
+    <tag k="cycleway" v="lane"/>
+    <tag k="highway" v="secondary"/>
+    <tag k="name" v="U Uranie"/>
+    <tag k="name:de" v="Bei der Urania"/>
+    <tag k="surface" v="asphalt"/>
+  </way>
+  <way id="583962445" version="1" timestamp="2018-04-27T14:23:04Z" uid="255936" user="StenSoft" changeset="58477494">
+    <nd ref="5417381405"/>
+    <nd ref="320363962"/>
+    <nd ref="1016635513"/>
+    <nd ref="25665471"/>
+    <tag k="cycleway" v="lane"/>
+    <tag k="highway" v="secondary"/>
+    <tag k="name" v="U Uranie"/>
+    <tag k="name:de" v="Bei der Urania"/>
+    <tag k="surface" v="asphalt"/>
+  </way>
+  <way id="595934569" version="2" timestamp="2019-04-12T11:54:58Z" uid="100163" user="Hlav" changeset="69146594">
+    <nd ref="25665451"/>
+    <nd ref="5417381400"/>
+    <tag k="highway" v="secondary"/>
+    <tag k="junction" v="roundabout"/>
+    <tag k="lit" v="yes"/>
+    <tag k="maxspeed" v="50"/>
+    <tag k="ref" v="6"/>
+    <tag k="sidewalk" v="right"/>
+    <tag k="surface" v="asphalt"/>
+  </way>
+  <way id="595934572" version="2" timestamp="2019-04-12T11:54:58Z" uid="100163" user="Hlav" changeset="69146594">
+    <nd ref="1165428716"/>
+    <nd ref="25665471"/>
+    <tag k="highway" v="secondary"/>
+    <tag k="junction" v="roundabout"/>
+    <tag k="lit" v="yes"/>
+    <tag k="maxspeed" v="50"/>
+    <tag k="ref" v="6"/>
+    <tag k="sidewalk" v="right"/>
+    <tag k="surface" v="asphalt"/>
+  </way>
+</osm>

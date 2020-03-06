@@ -1,4 +1,5 @@
 // road network rendering using fill shader program
+#include <algorithm>
 #include <string>
 #include <vector>
 #include <thread>
@@ -13,6 +14,7 @@
 #include "glt/opengl.hpp"
 #include "glt/gles2.hpp"
 #include "glt/program.hpp"
+#include "glt/colors.hpp"
 #include "road.hpp"
 #include "geometry/box2.hpp"
 
@@ -20,6 +22,7 @@ using namespace std::chrono_literals;
 using std::string,
 	std::vector,
 	std::size,
+	std::max,
 	std::cout,
 	std::endl;
 using glm::vec2,
@@ -89,38 +92,40 @@ int main(int argc, char * argv[])
 	read_roads(map_file, roads, roads_area);
 	assert(!roads.empty());
 
+	float map_w = geom::width(roads_area),
+		map_h = geom::height(roads_area),
+		area_width = max(map_w, map_h);
+
+	// we want fit to (-1,-1),(1,1) screen
+	float scale = 1/area_width;
+	vec3 tile_offset = vec3{roads_area.min_corner() + vec2{
+		map_w/2.f, map_h/2.f}, scale*2};
+
 	cout << "there were " << size(roads) << " roads found in '" << map_file
 		<< "' map file\n"
-		<< "in a " << dsv(roads_area) << " area\n";
-
-	cout << "area width=" << geom::width(roads_area) << ", height="
-		<< geom::height(roads_area) << "\n";
-
-	float area_width = 0.001f;
-	vec3 tile_offset = vec3{roads_area.min_corner(), 1/area_width};
+		<< "in a " << dsv(roads_area) << " area\n"
+		<< "area width=" << map_w << ", height=" << map_h << "\n"
+		<< "min area corner is " << dsv(roads_area.min_corner()) << "\n"
+		<< "tile offset is " << dsv(tile_offset) << "\n";
 
 	// road 1
 	cout << "road_0:\n";
 	dump_road(roads[0], tile_offset);
 
-
 	program flat;
 	flat.from_memory(shader_program_code, 100);
-
 	GLint position_loc = flat.attribute_location("position");
+	program::uniform_type tile_offset_u = flat.uniform_variable("tile_offset"),
+		color_u = flat.uniform_variable("color");
 
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	glViewport(0, 0, WIDTH, HEIGHT);
-
-	vec4 road_color = vec4{64/255.0f, 64/255.0f, 64/255.0f, 1.0f};
+	vec4 road_color = vec4{rgb::white, 1};
 	float road_width = 0.05f;
 	GLuint road_vbo = push_road(sample_road, 4, road_width);
 
 	vector<GLuint> road_vbos = push_road_network(roads, road_width);
 
-
-	program::uniform_type tile_offset_u = flat.uniform_variable("tile_offset"),
-		color_u = flat.uniform_variable("color");
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glViewport(0, 0, WIDTH, HEIGHT);
 
 	while (!glfwWindowShouldClose(window)) 
 	{
