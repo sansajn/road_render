@@ -1,17 +1,46 @@
-''' road render project build file
+''' road render project build file with custom installed gcc support, run with --help option to see details.
 
 dependencies:
 
+	libglm-dev
 	libglfw3-dev (3.2.1, ubuntu 18.04)
 	libglew-dev (2.0.5, ubuntu 18.04)
+	libosmium2-dev (2.15, ubuntu 19.10)
+	libexpat1-dev (2.2.7, ubuntu 19.10)
+	
+compatible with 16.04, 18.04 and 19.10 ubuntu derived distributions.
 '''
 
-cpp17 = Environment(
-	CCFLAGS=['-std=c++17', '-Wall', '-O0', '-g'],
-	CPPDEFINES=['IMGUI_IMPL_OPENGL_ES3'],
-	CPPPATH=['.', 'imgui/', 'imgui/examples/'])
+# --gcc-version=X.Y
+AddOption('--gcc-version', action='store', dest='gcc_version', type='string', help='build with specified gcc version (like 9.2)')
 
-cpp17.ParseConfig('pkg-config --cflags --libs glfw3 glew gl')
+
+ccflags = ['-std=c++17', '-Wall', '-O0', '-g']
+cppdefines = ['IMGUI_IMPL_OPENGL_ES3', 'GLM_FORCE_RADIANS', 'GLM_ENABLE_EXPERIMENTAL']
+cpppath = ['.', 'imgui/', 'imgui/examples/']
+libs = ['bz2', 'z', 'pthread']
+
+
+gcc_version = GetOption('gcc_version')
+if not gcc_version:  # prefer default gcc
+	cpp17 = Environment(
+		CCFLAGS = ccflags,
+		CPPDEFINES = cppdefines,
+		CPPPATH = cpppath,
+		LIBS = libs)
+else:
+	import os
+	cpp17 = Environment(
+		CCFLAGS = ccflags,
+		CPPDEFINES = cppdefines,
+		CPPPATH = cpppath,
+		LIBS = libs,
+		CXX = 'g++-%s' % (gcc_version, ),
+		CC = 'gcc-%s' % (gcc_version, ))
+	cpp17.Append(ENV = {'PATH' : os.environ['PATH']})
+
+
+cpp17.ParseConfig('pkg-config --cflags --libs glfw3 glew gl expat')
 
 imgui = cpp17.StaticLibrary([
 	Glob('imgui/*.cpp'),
@@ -26,7 +55,16 @@ glt = cpp17.Object([
 	'glt/program.cpp'
 ])
 
-cpp17.Program(['road_render.cpp', glt, imgui])
+map = cpp17.Object([
+	'road.cpp',
+	Glob('geometry/*.cpp')
+])
+
+cpp17.Program(['road_render.cpp', glt, map, imgui])
 
 # tests
 cpp17.Program(['test_triangle.cpp', glt])
+cpp17.Program(['test_read_map.cpp', map])
+cpp17.Program(['test_road_render.cpp', glt, imgui])
+cpp17.Program(['test_location_conv.cpp'])
+cpp17.Program(['test_show_map.cpp', glt, map])
