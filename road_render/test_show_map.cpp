@@ -94,6 +94,7 @@ int main(int argc, char * argv[])
 
 	// road 1
 	cout << "road_0:\n";
+	dump_road(roads[0]);
 	dump_road(roads[0], tile_offset);
 
 	program flat;

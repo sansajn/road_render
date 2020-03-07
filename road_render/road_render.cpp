@@ -72,6 +72,7 @@ void draw_road(GLuint position_vbo, GLint position_loc, size_t node_count);
 void gui_init(GLFWwindow * window);
 GLFWwindow * sample_window();
 void dump_road(road const & r, vec3 const & tile_offset);
+void transform_to_map_space(vector<road> & roads, vec3 const & map_transform);
 
 
 int main(int argc, char * argv[]) 
@@ -89,24 +90,40 @@ int main(int argc, char * argv[])
 
 	box roads_area;
 	vector<road> roads;
-	read_roads(map_file, roads, roads_area);
+	read_roads(map_file, roads, roads_area);  // road geometry is in GPS space
 	assert(!roads.empty());
 
 	float map_w = geom::width(roads_area),
 		map_h = geom::height(roads_area),
 		area_width = max(map_w, map_h);
 
-	// we want fit to (-1,-1),(1,1) screen
+	// we want fit to (0,0),(1,1) area
 	float scale = 1/area_width;
-	vec3 tile_offset = vec3{roads_area.min_corner() + vec2{
-		map_w/2.f, map_h/2.f}, scale*2};
+	vec3 map_transform = vec3{roads_area.min_corner(), scale};
 
-	cout << "there were " << size(roads) << " roads found in '" << map_file
-		<< "' map file\n"
+	size_t node_count = 0;
+	for (road const & r : roads)
+		node_count += size(r.geometry);
+
+	cout << "there were " << size(roads) << " roads with " << node_count
+		<< " nodes found in '" << map_file << "' map file\n"
 		<< "in a " << dsv(roads_area) << " area\n"
 		<< "area width=" << map_w << ", height=" << map_h << "\n"
 		<< "min area corner is " << dsv(roads_area.min_corner()) << "\n"
-		<< "tile offset is " << dsv(tile_offset) << "\n";
+		<< "map offset and scale is " << dsv(map_transform) << "\n";
+
+	cout << "nodes:\n";
+	for (road const & r : roads)
+	{
+		for (vec2 const & n : r.geometry)
+			cout << "  " << dsv(n) << "\n";
+		cout << "-\n";
+	}
+
+	transform_to_map_space(roads, map_transform);
+
+	float map_scale = 2.f;
+	vec3 tile_offset = vec3{vec2{1} / map_scale, map_scale};
 
 	// road 1
 	cout << "road_0:\n";
@@ -118,10 +135,12 @@ int main(int argc, char * argv[])
 	program::uniform_type tile_offset_u = flat.uniform_variable("tile_offset"),
 		color_u = flat.uniform_variable("color");
 
-	vec4 road_color = vec4{rgb::white, 1};
-	float road_width = 0.05f;
-	GLuint road_vbo = push_road(sample_road, 4, road_width);
+	float const base_road_width = 0.01f;
+	float road_width_k = 1.0;
 
+	vec4 road_color = vec4{rgb::white, 1};
+
+	float road_width = road_width_k * base_road_width;
 	vector<GLuint> road_vbos = push_road_network(roads, road_width);
 
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -139,10 +158,9 @@ int main(int argc, char * argv[])
 		ImGui::Begin("Road");  // begin window
 
 		// ...
-		if (ImGui::SliderFloat("width", &road_width, 0.01f, 0.2f))
+		if (ImGui::SliderFloat("width multiplier", &road_width_k, 0.2f, 5.f))
 		{
-			glDeleteBuffers(1, &road_vbo);
-			road_vbo = push_road(sample_road, 4, road_width);
+			road_width = road_width_k * base_road_width;
 
 			glDeleteBuffers(size(road_vbos), &road_vbos[0]);
 			road_vbos = push_road_network(roads, road_width);
@@ -156,12 +174,10 @@ int main(int argc, char * argv[])
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		flat.use();
-		tile_offset_u = vec3{0,0,1};
 		color_u = road_color;
-		draw_road(road_vbo, position_loc, 4);
 
 		tile_offset_u = tile_offset;
-		for (size_t i = 0; i < 1/*size(road_vbos)*/; ++i)
+		for (size_t i = 0; i < size(road_vbos); ++i)
 			draw_road(road_vbos[i], position_loc, size(roads[i].geometry));
 
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
@@ -171,10 +187,17 @@ int main(int argc, char * argv[])
 		std::this_thread::sleep_for(10ms);
 	}
 	
-	glDeleteBuffers(1, &road_vbo);
+	glDeleteBuffers(size(road_vbos), &road_vbos[0]);
 	glfwTerminate();
 	
 	return 0;
+}
+
+void transform_to_map_space(vector<road> & roads, vec3 const & map_transform)
+{
+	for (road & r : roads)
+		for (vec2 & n : r.geometry)
+			n = (n - vec2{map_transform.x, map_transform.y}) * map_transform.z;
 }
 
 void draw_road(GLuint position_vbo, GLint position_loc, size_t node_count)
