@@ -24,6 +24,10 @@ command.
 
 ## history
 
+We can render directly from Open Street Map dat.
+
+![OSM map rendering](docs/map_data_rendered.png)
+
 Three road elements rendered with simple (flat color based) road shader program in a window.
 
 ![road element rendered with simple road shader program](docs/simple_road_shader.png)

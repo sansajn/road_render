@@ -1,7 +1,8 @@
-// road network rendering using fill shader program
+// test for road join apgorithm
 #include <algorithm>
 #include <string>
 #include <vector>
+#include <list>
 #include <thread>
 #include <chrono>
 #include <iterator>
@@ -21,7 +22,9 @@
 using namespace std::chrono_literals;
 using std::string,
 	std::vector,
+	std::list,
 	std::size,
+	std::min,
 	std::max,
 	std::cout,
 	std::endl;
@@ -64,6 +67,9 @@ GLFWwindow * sample_window();
 void dump_road(road const & r, vec3 const & tile_offset);
 void transform_to_map_space(vector<road> & roads, vec3 const & map_transform);
 
+//! \note super slow implementation and also road types are lost when roads merget
+void road_join(vector<road> & roads);
+
 
 int main(int argc, char * argv[]) 
 {
@@ -82,6 +88,7 @@ int main(int argc, char * argv[])
 	vector<road> roads;
 	read_roads(map_file, roads, roads_area);  // road geometry is in GPS space
 	assert(!roads.empty());
+	road_join(roads);
 
 	float map_w = geom::width(roads_area),
 		map_h = geom::height(roads_area),
@@ -101,14 +108,6 @@ int main(int argc, char * argv[])
 		<< "area width=" << map_w << ", height=" << map_h << "\n"
 		<< "min area corner is " << dsv(roads_area.min_corner()) << "\n"
 		<< "map offset and scale is " << dsv(map_transform) << "\n";
-
-	cout << "nodes:\n";
-	for (road const & r : roads)
-	{
-		for (vec2 const & n : r.geometry)
-			cout << "  " << dsv(n) << "\n";
-		cout << "-\n";
-	}
 
 	transform_to_map_space(roads, map_transform);
 
@@ -181,6 +180,63 @@ int main(int argc, char * argv[])
 	glfwTerminate();
 	
 	return 0;
+}
+
+void road_join(vector<road> & roads)
+{
+	// sort roads
+	list<road const *> chain;
+	chain.push_back(&roads[0]);
+	for (size_t i = 1; i < size(roads); ++i)
+	{
+		vec2 const & head = roads[i].geometry.front(),
+			tail = roads[i].geometry.back();
+
+		auto parent_road_it = chain.cend();
+
+		for (auto it = chain.cbegin(); it != chain.cend(); ++it)
+		{
+			if ((*it)->geometry.front() == tail)
+			{
+				parent_road_it = it;
+				break;
+			}
+			else if ((*it)->geometry.back() == head)
+			{
+				auto next = it;
+				++next;
+				parent_road_it = next;
+				break;
+			}
+		}
+
+		chain.insert(parent_road_it, &roads[i]);
+	}
+
+	// recreate geometry
+	vector<road> result;
+
+	road_type type;
+	vector<vec2> geometry;
+	for (road const * r : chain)
+	{
+		if (!empty(geometry)
+			&& geometry.back() == r->geometry.front())  // merge geometries
+		{
+			type = min(type, r->type);
+			geometry.insert(geometry.end(), r->geometry.begin() + 1, r->geometry.end());
+		}
+		else
+		{
+			if (!empty(geometry))
+				result.push_back(road{type, geometry});
+
+			type = r->type;
+			geometry = r->geometry;
+		}
+	}
+
+	roads = result;
 }
 
 void transform_to_map_space(vector<road> & roads, vec3 const & map_transform)
