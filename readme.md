@@ -24,7 +24,7 @@ command.
 
 ## history
 
-We can render directly from Open Street Map dat.
+We can render directly from Open Street Map data.
 
 ![OSM map rendering](docs/map_data_rendered.png)
 

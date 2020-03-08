@@ -2,11 +2,11 @@
 
 dependencies:
 
-	libglm-dev
+	libglm-dev (0.9.9, ubuntu 18.04)
 	libglfw3-dev (3.2.1, ubuntu 18.04)
 	libglew-dev (2.0.5, ubuntu 18.04)
-	libosmium2-dev (2.15, ubuntu 19.10)
-	libexpat1-dev (2.2.7, ubuntu 19.10)
+	libosmium2-dev (2.13, ubuntu 18.04)
+	libexpat1-dev (2.2.5, ubuntu 18.04)
 	
 compatible with 16.04, 18.04 and 19.10 ubuntu derived distributions.
 '''
